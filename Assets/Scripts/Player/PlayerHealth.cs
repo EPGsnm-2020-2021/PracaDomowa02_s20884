@@ -40,5 +40,6 @@ public class PlayerHealth : MonoBehaviour
     private void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PlayerPrefs.GetInt("Points", 0);
     }
 }

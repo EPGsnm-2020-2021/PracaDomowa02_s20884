@@ -5,6 +5,7 @@ using UnityEngine;
 public class CoinCollect : MonoBehaviour
 {
    public Animator animator;
+    public int points;
     
 
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class CoinCollect : MonoBehaviour
         {
 
             animator.SetTrigger("CoinGet");
+            collision.gameObject.GetComponent<PlayerPoints>().Points(points);
             Destroy(animator.gameObject);
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Barrel : MonoBehaviour
 
@@ -31,6 +32,7 @@ public class Barrel : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             Destroy(collision.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
