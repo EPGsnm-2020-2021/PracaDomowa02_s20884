@@ -20,7 +20,7 @@ public class CoinCollect : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
 
-            animator.SetTrigger("CoinGet");
+            
             collision.gameObject.GetComponent<PlayerPoints>().Points(points);
             Destroy(animator.gameObject);
         }

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9270323b011a7c14eb2f5658e6d7fdf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneNameToLoad: 2_Level
+  sceneNameToLoad: 6_Level
 --- !u!61 &7285173011211097976
 BoxCollider2D:
   m_ObjectHideFlags: 0

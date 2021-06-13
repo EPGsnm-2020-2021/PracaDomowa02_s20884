@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-   
-    
-    float curHealth;
+
+    public const int MAX_HEALTH = 10;
+    public int curHealth;
     private Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -42,4 +42,21 @@ public class PlayerHealth : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         PlayerPrefs.GetInt("Points", 0);
     }
+    public void Heal(int i)
+    {
+        curHealth += i;
+
+        if (curHealth > MAX_HEALTH)
+        {
+            curHealth = MAX_HEALTH;
+        }
+        StartCoroutine(Healing());
+    }
+    public IEnumerator Healing()
+    {
+        animator.SetBool("Healing", true);
+        yield return new WaitForSeconds(1);
+        animator.SetBool("Healing", false);
+    }
 }
+

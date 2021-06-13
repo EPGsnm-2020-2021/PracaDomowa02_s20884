@@ -6,8 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10;
     public float jumpForce = 400;
-    
 
+    public GameObject player;
     private Rigidbody2D rb;
     public bool isGrounded;
     private Animator animator;
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(new Vector2(0, jumpForce));
-            
+
         }
 
 
@@ -52,7 +52,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 isGrounded = true;
                 animator.SetBool("IsJumping", false);
-            }else if(item.transform.tag == "Death")
+            }
+            else if (item.transform.tag == "Death")
             {
                 animator.SetBool("IsDead", true);
             }
@@ -62,32 +63,38 @@ public class PlayerMovement : MonoBehaviour
                 isGrounded = false;
                 animator.SetBool("IsJumping", true);
             }
+            if (item.transform.tag == "Platform")
+            {
+                isGrounded = true;
+                animator.SetBool("IsJumping", false);
 
+            }
         }
-    }
-    
- 
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        isGrounded = true;
 
-        if ( col.gameObject.name.Equals ("moving platform"))
+
+        void OnCollisionEnter2D(Collision2D collider)
         {
-            this.transform.parent = col.transform;
+            isGrounded = true;
+
+            if (collider.gameObject.CompareTag("Platform") && isGrounded)
+            {
+                player.transform.parent = collider.gameObject.transform;
+
+            }
+
         }
 
-    }
-
-    void OnCollisionExit2D(Collision2D col)
-    {
-        isGrounded = true;
-
-        if (col.gameObject.name.Equals("moving platform"))
+        void OnCollisionExit2D(Collision2D collider)
         {
-            this.transform.parent = null;
+            isGrounded = false;
+
+            if (collider.gameObject.CompareTag("Platform"))
+            {
+                player.transform.parent = null;
+            }
+
         }
 
     }
-
 }
