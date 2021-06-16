@@ -7,17 +7,25 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 10;
     public float jumpForce = 400;
 
+    public SpriteRenderer sprite;
     public GameObject player;
     private Rigidbody2D rb;
     public bool isGrounded;
     private Animator animator;
     public float Dist;
+    public float DashForce;
+    public float StartDashTimer;
+
+    float CurrentDashTimer;
+    float DashDirection;
+    bool isDashing;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         animator.SetBool("IsDead", false);
+
     }
 
     // Update is called once per frame
@@ -27,6 +35,16 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(xDisplacement, rb.velocity.y);
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
 
+        if (rb.velocity.x > 0)
+            {
+            sprite.flipX = false;
+
+            }
+        else if (rb.velocity.x < 0)
+            {
+            sprite.flipX = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(new Vector2(0, jumpForce));
@@ -34,14 +52,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 20;
-        }
-        else
-        {
-            speed = 10;
-        }
+        
 
         Debug.DrawLine(transform.position, transform.position + new Vector3(0, -Dist, 0), Color.green);
 
@@ -71,6 +82,35 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift) && speed != 0)
+        {
+            isDashing = true;
+            CurrentDashTimer = StartDashTimer;
+            rb.velocity = Vector2.zero;
+            DashDirection = (int)speed;
+        }
+        if (isDashing)
+        {
+            if(rb.velocity.x > 0)
+            {
+                rb.velocity = transform.right * DashDirection * DashForce;
+                
+            } else if (rb.velocity.x < 0)
+            {
+                rb.velocity = transform.right * DashDirection * DashForce * -1;
+            }
+
+            animator.SetBool("Dashing", true);
+            CurrentDashTimer -= Time.deltaTime;
+
+            if (CurrentDashTimer <= 0)
+            {
+                isDashing = false;
+                animator.SetBool("Dashing", false);
+            }
+        }
+    }
+
 
 
         void OnCollisionEnter2D(Collision2D collider)
@@ -96,5 +136,5 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-    }
+    
 }

@@ -15,7 +15,7 @@ public class LevelLoader : MonoBehaviour
             int points = GameObject.Find("Player").GetComponent<PlayerPoints>().points;
             PlayerPrefs.SetInt("Points", points);
             SceneManager.LoadScene(sceneNameToLoad);
-
+            
 
         }
 

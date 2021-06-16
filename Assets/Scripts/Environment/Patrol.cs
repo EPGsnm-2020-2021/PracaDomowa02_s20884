@@ -12,6 +12,7 @@ public class Patrol : MonoBehaviour
     public LayerMask Ground;
     public Collider2D bodyCollider;
     public Animator animator;
+    
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -52,6 +53,7 @@ public class Patrol : MonoBehaviour
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
         walkSpeed *= -1;
         mustPatrol = true;
+        
     }
 }
 

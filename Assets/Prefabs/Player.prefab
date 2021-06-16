@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5137007318811496979}
   - component: {fileID: 5137007318811496976}
-  - component: {fileID: 5137007318811496977}
+  - component: {fileID: 3028656217661276313}
   - component: {fileID: 5137007318811496982}
   - component: {fileID: 5137007318811496983}
   - component: {fileID: 5137007318811496980}
   - component: {fileID: 5137007318811496981}
   - component: {fileID: 5137007318811496978}
-  - component: {fileID: 5488366841839175665}
+  - component: {fileID: 7746380706036869133}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -88,8 +88,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5137007318811496977
-BoxCollider2D:
+--- !u!70 &3028656217661276313
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101,19 +101,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0012660027, y: -0.03084737}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6378641, y: 0.8742956}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.0016627312, y: -0.018288076}
+  m_Size: {x: 0.7240076, y: 0.9368199}
+  m_Direction: 0
 --- !u!50 &5137007318811496982
 Rigidbody2D:
   serializedVersion: 4
@@ -149,9 +139,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpForce: 400
+  sprite: {fileID: 5137007318811496976}
   player: {fileID: 5137007318811496986}
   isGrounded: 0
   Dist: 0.5
+  DashForce: 3
+  StartDashTimer: 0.1
 --- !u!95 &5137007318811496980
 Animator:
   serializedVersion: 3
@@ -178,7 +171,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5137007318811496986}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d849791b6124c54e970776ba3b91be5, type: 3}
   m_Name: 
@@ -197,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 0
---- !u!114 &5488366841839175665
+--- !u!114 &7746380706036869133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,9 +199,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5137007318811496986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea96179a9f8a4c74b9ebd0ee02aa1dfd, type: 3}
+  m_Script: {fileID: 11500000, guid: 19ca482090147c64d99d7636b1d87d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dashSpeed: 60
   startDashTime: 0.1
-  animator: {fileID: 5137007318811496980}
